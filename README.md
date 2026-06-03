@@ -1,4 +1,4 @@
-# Relational ORM
+# Relational ORM (Flutter)
 
 A lightweight Active Record style ORM for Dart and Flutter with relations, eager loading, polymorphic relations, soft deletes, and query builder support. Works with any SQL database through a simple adapter.
 
