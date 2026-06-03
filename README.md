@@ -336,7 +336,7 @@ class Comment extends RelationalModel<Comment> with _$Comment {
       _$CommentFromJson(json);
 }
 ```
-See [example/models/](example/models/) for complete examples.
+See [example/model/](example/model/) for complete examples.
 
 ### Using Freezed
 
