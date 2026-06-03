@@ -73,18 +73,18 @@ for (final post in user.posts) {
 
 ## Contents
 
-- Installation
-- Configure Database
-- Defining Models
-- Relationships
-- Saving Models
-- Query Builder
-- Eager Loading
-- Hydrating Existing Query Results
-- Joins
-- Relation Queries
-- Soft Deletes
-- License
+- [Installation](#installation)
+- [Configure Database](#configure-database)
+- [Defining Models](#defining-models)
+- [Relationships](#relationships)
+- [Saving Models](#saving-models)
+- [Query Builder](#query-builder)
+- [Eager Loading](#eager-loading)
+- [Hydrating Existing Query Results](#hydrating-existing-query-results)
+- [Joins](#joins)
+- [Relation Queries](#relation-queries)
+- [Soft Deletes](#soft-deletes)
+- [License](#license)
 
 ## Installation
 
