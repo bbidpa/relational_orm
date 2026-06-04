@@ -707,7 +707,10 @@ abstract class RelationalModel<T extends RelationalModel<T>> {
 
       if (typeValue == null ||
           fkValue == null ||
-          !loadedParents.containsKey(typeValue)) continue;
+          !loadedParents.containsKey(typeValue)
+      ) {
+        continue;
+      }
 
       final parent = loadedParents[typeValue]![fkValue];
       item.setRelation(name, parent);

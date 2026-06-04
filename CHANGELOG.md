@@ -16,3 +16,7 @@
 - Updated dependencies.
 - Improved README documentation and examples.
 - Improved pub.dev package compatibility.
+
+## 0.1.2
+
+- Updated package dependencies to latest stable versions.

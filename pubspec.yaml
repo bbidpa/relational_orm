@@ -1,7 +1,7 @@
 name: relational_orm
 description: A lightweight Active Record ORM for Dart and Flutter with relations, eager loading, polymorphic relationships, and support for custom database adapters.
 
-version: 0.1.1
+version: 0.1.2
 
 license: Apache-2.0
 
@@ -20,15 +20,15 @@ environment:
   sdk: ">=3.5.0 <4.0.0"
 
 dependencies:
-  freezed_annotation: ">=2.4.1 <4.0.0"
-  json_annotation: ^4.9.0
-  intl: ">=0.19.0 <0.21.0"
-  uuid: ^4.5.1
+  freezed_annotation: ^3.1.0
+  intl: ^0.20.2
+  json_annotation: ^4.12.0
+  uuid: ^4.5.3
 
 dev_dependencies:
-  build_runner: ^2.5.4
-  freezed: ^2.5.2
-  json_serializable: ^6.9.5
-  lints: ^6.0.0
-  test: ^1.25.15
-  sqflite_common_ffi: ^2.3.6
+  build_runner: ^2.15.0
+  freezed: ^3.2.5
+  json_serializable: ^6.14.0
+  lints: ^6.1.0
+  test: ^1.31.0
+  sqflite_common_ffi: ^2.3.7+1
