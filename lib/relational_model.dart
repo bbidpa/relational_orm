@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'helper.dart';
 import 'relational_database_adapter.dart';
@@ -130,12 +129,12 @@ abstract class RelationalModel<T extends RelationalModel<T>> {
     await model.dbService.insert(model.table, data);
   }
 
-  /// Create ModelName.create(Map<String, dynamic> data)
+  /// Insert and get id
   static Future<int> insertGetId<T extends RelationalModel<T>>(T model, Map<String, dynamic> data) async {
     return await model.dbService.insert(model.table, data);
   }
 
-  /// Create RelationalModel.create(ModelName, Map<String, dynamic> data)
+  /// Create model from data
   static Future<T> create<T extends RelationalModel<T>>(T model, Map<String, dynamic> data) async {
     final db = model.dbService;
     final pkValue = await db.insert(model.table, data);
@@ -817,7 +816,7 @@ abstract class RelationalModel<T extends RelationalModel<T>> {
         rel.pivotRelatedKey!: relatedId,
         ...?pivot,
       },
-      conflictAlgorithm: ConflictAlgorithm.ignore
+      // conflictAlgorithm: ConflictAlgorithm.ignore
     );
 
     // Optional: keep in-memory relation consistent if already loaded

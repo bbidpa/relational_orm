@@ -1,5 +1,3 @@
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-
 abstract class RelationalDatabaseAdapter {
   Future<List<Map<String, dynamic>>> get(
     String table, {
@@ -16,9 +14,8 @@ abstract class RelationalDatabaseAdapter {
 
   Future<dynamic> insert(
     String table,
-    Map<String, dynamic> values, {
-    ConflictAlgorithm? conflictAlgorithm,
-  });
+    Map<String, dynamic> values
+  );
 
   Future<dynamic> update(
     String table,

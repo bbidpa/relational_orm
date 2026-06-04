@@ -1,10 +1,10 @@
 import 'package:relational_orm/relational_orm.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-class AppDatabaseAdapter implements RelationalDatabaseAdapter {
+class DatabaseAdapter implements RelationalDatabaseAdapter {
   final Database db;
 
-  AppDatabaseAdapter(this.db);
+  DatabaseAdapter(this.db);
 
   @override
   Future<List<Map<String, dynamic>>> get(
@@ -18,31 +18,19 @@ class AppDatabaseAdapter implements RelationalDatabaseAdapter {
     String? orderBy,
     int? limit,
     int? offset,
-  }) async {
-    final columns = select?.join(', ') ?? '*';
-    final distinctSql = distinct ? 'DISTINCT ' : '';
-    final joinSql = joins?.join(' ') ?? '';
-    final whereSql = where != null ? 'WHERE $where' : '';
-    final groupSql =
-        groupBy != null && groupBy.isNotEmpty
-            ? 'GROUP BY ${groupBy.join(', ')}'
-            : '';
-    final orderSql = orderBy != null ? 'ORDER BY $orderBy' : '';
-    final limitSql = limit != null ? 'LIMIT $limit' : '';
-    final offsetSql = offset != null ? 'OFFSET $offset' : '';
-
-    final sql = '''
-      SELECT $distinctSql$columns
-      FROM $table
-      $joinSql
-      $whereSql
-      $groupSql
-      $orderSql
-      $limitSql
-      $offsetSql
-    ''';
-
-    return db.rawQuery(sql, params);
+  }) {
+    return queryTableWithJoins(
+      table,
+      select: select,
+      distinct: distinct,
+      joins: joins,
+      where: where,
+      whereArgs: params,
+      groupBy: groupBy,
+      orderBy: orderBy,
+      limit: limit,
+      offset: offset,
+    );
   }
 
   @override
@@ -92,5 +80,53 @@ class AppDatabaseAdapter implements RelationalDatabaseAdapter {
     List<dynamic>? args,
   ]) {
     return db.rawQuery(sql, args);
+  }
+
+  Future<List<Map<String, dynamic>>> queryTableWithJoins(
+    String table, {
+    List<String>? select, 
+    bool distinct = false,
+    List<String>? joins,
+    String? where,
+    List<dynamic>? whereArgs,
+    List<String>? groupBy,
+    String? orderBy,
+    int? limit,
+    int? offset,
+  }) async {
+    final joinSql =
+        joins != null && joins.isNotEmpty ? ' ${joins.join(' ')} ' : '';
+
+    final selectClause =
+        select != null && select.isNotEmpty ? select.join(', ') : '*';
+
+    final distinctClause = distinct ? 'DISTINCT ' : '';
+
+    final sql = StringBuffer()
+      ..write('SELECT $distinctClause$selectClause FROM $table$joinSql');
+
+    if (where != null && where.trim().isNotEmpty) {
+      sql.write(' WHERE $where');
+    }
+
+    if (groupBy != null && groupBy.isNotEmpty) {
+      sql.write(' GROUP BY ${groupBy.join(', ')}');
+    }
+
+    if (orderBy != null) {
+      sql.write(' ORDER BY $orderBy');
+    }
+
+    if (limit != null) {
+      sql.write(' LIMIT $limit');
+    }
+
+    if (offset != null) {
+      sql.write(' OFFSET $offset');
+    }
+
+    sql.write(';');
+
+    return await raw(sql.toString(), whereArgs);
   }
 }
