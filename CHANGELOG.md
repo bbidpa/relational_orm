@@ -9,3 +9,10 @@
 - Added relation helpers.
 - Added polymorphic relations.
 - Added database adapter interface.
+
+## 0.1.1
+
+- Moved SQLite dependency to `dev_dependencies`.
+- Updated dependencies.
+- Improved README documentation and examples.
+- Improved pub.dev package compatibility.

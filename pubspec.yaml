@@ -1,7 +1,7 @@
 name: relational_orm
 description: A lightweight Active Record ORM for Dart and Flutter with relations, eager loading, polymorphic relationships, and support for custom database adapters.
 
-version: 0.1.0
+version: 0.1.1
 
 license: Apache-2.0
 
